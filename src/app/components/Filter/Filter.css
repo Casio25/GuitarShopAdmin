@@ -1,0 +1,34 @@
+.filter_checkboxes fieldset {
+    border: none;
+
+}
+
+h1,
+h5 {
+    margin-left: 10px;
+}
+
+
+.price_range {
+    display: flex;
+
+}
+
+.price_range input {
+    padding: 13px;
+    /* Add padding for a comfortable input area */
+    font-size: 14px;
+    /* Adjust the font size to your preference */
+    color: #333;
+    /* Set the text color */
+    box-shadow: none;
+    /* Remove any box shadow that might be applied */
+    transition: border-color 0.3s ease;
+    /* Add a smooth transition for the border color */
+}
+
+
+
+.min_price {
+    margin-left: 10px;
+}

@@ -1,0 +1,35 @@
+.sortBlock {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+.sort_criteria {
+    display: flex;
+}
+
+.sort_dynamic {
+    display: flex;
+    margin-left: auto;
+    margin-right: 100px;
+}
+
+
+
+.sort_dynamic .sort_up_button,
+.sort_dynamic .sort_down_button {
+    cursor: pointer;
+    margin-right: 20px;
+    /* Increase distance between elements by adding margin */
+}
+
+.sort_criteria p {
+    cursor: pointer;
+    margin-left: 10px;
+    background: #66B2FF;
+    border-radius: 8px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    box-sizing: border-box;
+    margin-top: -1px;
+}

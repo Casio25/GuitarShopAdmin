@@ -1,0 +1,66 @@
+.container {
+    display: flex;
+}
+
+.filter_block {
+    flex: 20%;
+
+}
+
+.guitar_catalog {
+    flex: 80%;
+}
+
+.guitar_catalog {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    /* Three columns with equal width */
+    grid-gap: 20px;
+    /* Gap between grid items */
+}
+
+.guitar_card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 8px;
+    border: 1px solid #DDDADA;
+    padding-bottom: 20px;
+}
+
+.guitar_image {
+
+    height: auto;
+    /* Maintain aspect ratio */
+}
+
+
+/* buttons desing */
+.guitar_buttons {
+    margin-left: 20px;
+}
+
+.guitar_buttons button {
+    cursor: pointer;
+    border: none;
+    border-radius: 2px;
+    margin-right: 10px;
+    /* Increase the margin-right to increase the distance between buttons */
+    padding: 8px 12px;
+    /* Adjust the padding values to change the button size */
+    font-size: 14px;
+    /* Adjust the font-size to change the button text size */
+}
+
+.button_more_info {
+    color: white;
+    background: #C1C1C1;
+
+}
+
+.button_buy {
+    background-color: orange;
+    color: white;
+}
