@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import { offers } from "../FakeData.js";
 import filteredDataStore from "../../store/FilteredDataStore.js";
+import LoginStore from "@/app/store/LoginStore.js";
 import * as variables from "../variables.js";
 import "./Filter.css"
 import React from "react";
@@ -42,7 +43,7 @@ const FilterBlock = () => {
 
         const filtered = filteredDataStore.applyFilter(filteredDataStore.initialData);
         filteredDataStore.updateFilteredData(filtered);
-        fetchData()
+        fetchData(LoginStore)
 
     }
 

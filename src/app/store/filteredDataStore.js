@@ -6,6 +6,7 @@ import { offers } from "../components/FakeData.js";
 import { ChangeEvent } from "react";
 import { useEffect, useState } from "react";
 import LoginStore from "./LoginStore.js";
+import { fetchData } from "./actions.js";
 
 
 
@@ -161,50 +162,11 @@ const filteredDataStore = observable({
 
 export default filteredDataStore;
 
-// sending our filter parameters to backend to get filteredData
-export const fetchData =  async () => {
-    const queryParams = {}
-
-    if (filteredDataStore.filterArray.type.length > 0) {
-        queryParams.type = filteredDataStore.filterArray.type.join(",");
-    }
-    if (filteredDataStore.filterArray.string.length > 0) {
-        queryParams.string = filteredDataStore.filterArray.string.join(",")
-    }
-    if (filteredDataStore.filterArray.price.minPrice !== undefined ||
-        filteredDataStore.filterArray.price.maxPrice !== undefined) {
-        queryParams.price = JSON.stringify({
-            minPrice: filteredDataStore.filterArray.price.minPrice,
-            maxPrice: filteredDataStore.filterArray.price.maxPrice
-
-        })
-    }
-
-    const queryString = Object.keys(queryParams)
-        .map((key) => `${key}=${queryParams[key]}`)
-        .join('&')
-
-    console.log()
-
-    const url = `http://localhost:4000/catalog?skip=0&take=${filteredDataStore.take}&${queryString}`
-    const response =  await fetch(url, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            "Access-Control-Allow-Origin": "*",
-            "Authorization": `Bearer ${LoginStore.jwtToken}`
-        },
-
-    });
-    // debugger
-    console.log("response: ", response)
-    const responseData =  await response.json();
-    console.log(responseData);
-    return responseData;
-}
 
 export function DataFetcher() {
-    const { data: initialData, isLoading } = useQuery("initialData", fetchData);
+    const { data: initialData, isLoading } = useQuery("initialData", fetchData(LoginStore), {
+        staleTime: 0,
+    });
 
     useEffect(() => {
         if (!isLoading) {

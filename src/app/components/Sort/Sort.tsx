@@ -1,3 +1,4 @@
+"use client"
 import { observer } from "mobx-react";
 import { toJS } from "mobx";
 import React from "react";

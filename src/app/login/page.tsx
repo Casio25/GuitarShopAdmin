@@ -3,7 +3,6 @@ import { useState } from 'react';
 import { observer } from "mobx-react-lite";
 import  { ILogin } from "../utils/interface/ILogin"
 import  LoginStore from "../store/LoginStore.js"
-// import {postLogin} from "../Actions/LoginAction"
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
