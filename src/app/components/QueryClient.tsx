@@ -20,7 +20,7 @@ export const QueryClientComponent = ({
         <QueryClientProvider client={queryClient}>
             <html lang="en">
                 <body>
-                    <DataFetcher />
+                    <DataFetcher/>
                     <Header />
                     {children}
                 </body>

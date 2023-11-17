@@ -9,7 +9,7 @@ import * as variables from "../variables.js";
 import "./Filter.css"
 import React from "react";
 import { Stack, TextField, Checkbox, Slider, Button } from "@mui/material"
-import { fetchData } from '../../store/FilteredDataStore.js';
+import { fetchData } from '../../store/actions';
 import { DataFetcher } from "../../store/FilteredDataStore.js";
 
 const FilterBlock = () => {
@@ -43,7 +43,8 @@ const FilterBlock = () => {
 
         const filtered = filteredDataStore.applyFilter(filteredDataStore.initialData);
         filteredDataStore.updateFilteredData(filtered);
-        fetchData(LoginStore)
+        fetchData()
+        console.log("jwt during confirm filter: ", LoginStore.jwtToken)
 
     }
 

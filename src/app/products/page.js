@@ -14,6 +14,8 @@ import acustic from "../assets/images/acustic.png";
 import electro from "../assets/images/electro.png";
 import ukulele from "../assets/images/ukulele.png";
 import { Button, Stack } from '@mui/material'
+import Link from 'next/link'
+
 
 
 const AllProducts = () => {
@@ -72,6 +74,14 @@ const AllProducts = () => {
                                         </span>
                                     ))}
                                 </p>
+                                <Stack className="guitar_buttons" direction='row'>
+                                    <Button color='info' variant="contained" size='small' className="button_more_info" onClick={() => ModalMoreInfo(filteredData)}>
+                                        Інформація
+                                    </Button>
+                                    <Link href="/changeProductPage">
+                                        <Button className="button_change_product" onClick={() => ChangeProduct(filteredData)}>Change Product</Button>
+                                    </Link>
+                                </Stack>
                             </div>
                         ))}
                     </div>

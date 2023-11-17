@@ -6,7 +6,7 @@ import { offers } from "../components/FakeData.js";
 import { ChangeEvent } from "react";
 import { useEffect, useState } from "react";
 import LoginStore from "./LoginStore.js";
-import { fetchData } from "./actions.js";
+import { fetchData } from "./actions";
 
 
 
@@ -164,16 +164,19 @@ export default filteredDataStore;
 
 
 export function DataFetcher() {
-    const { data: initialData, isLoading } = useQuery("initialData", fetchData(LoginStore), {
-        staleTime: 0,
-    });
+    const { data: initialData, isLoading, isError } = useQuery("initialData", () => fetchData());
 
     useEffect(() => {
-        if (!isLoading) {
+        console.log("initialData:", initialData);
+        console.log("isLoading:", isLoading);
+        console.log("isError:", isError);
+        console.log("LoginStore token during reload: ", LoginStore.jwtToken)
+
+        if (!isLoading && !isError) {
             filteredDataStore.initialData = initialData || offers;
             filteredDataStore.currentProductList = initialData || offers;
         }
-    }, [initialData, isLoading]);
+    }, [initialData, isLoading, isError]);
 
     return null;
 }

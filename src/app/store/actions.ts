@@ -1,10 +1,12 @@
+
 import { IQueryParams } from './../utils/interface/IQueryParams';
 
 import { ILoginStore } from '../utils/interface/ILogin';
+import LoginStore from './LoginStore';
 
-import filteredDataStore from './FilteredDataStore'; // Import the store if needed
+import filteredDataStore from './FilteredDataStore'; 
 
-export const fetchData = async (LoginStore: ILoginStore) => {
+export const fetchData = async () => {
     try {
         const queryParams = <IQueryParams>{};
 
@@ -27,6 +29,7 @@ export const fetchData = async (LoginStore: ILoginStore) => {
         const queryString = Object.keys(queryParams)
             .map((key) => `${key}=${queryParams[key]}`)
             .join('&');
+        console.log("jwt during fetch", LoginStore.jwtToken)
 
         const url = `http://localhost:4000/catalog?skip=0&take=${filteredDataStore.take}&${queryString}`;
         const response = await fetch(url, {
@@ -34,7 +37,7 @@ export const fetchData = async (LoginStore: ILoginStore) => {
             headers: {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*',
-                Authorization: `Bearer ${LoginStore.jwtToken}`, // Make sure LoginStore is accessible
+                Authorization: `Bearer ${LoginStore.jwtToken}`, 
             },
         });
 
@@ -44,4 +47,4 @@ export const fetchData = async (LoginStore: ILoginStore) => {
         console.error('Error fetching data:', error);
         throw error; // Re-throw the error to handle it elsewhere if needed
     }
-};
+}

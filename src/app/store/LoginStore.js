@@ -1,11 +1,10 @@
-import { observable, } from "mobx";
+import { observable } from "mobx";
 
 const LoginStore = observable({
     jwtToken: "",
     email: "",
     password: "",
     orders: [],
-
 
     setJwtToken(token) {
         this.jwtToken = token;
@@ -19,9 +18,6 @@ const LoginStore = observable({
     setLoginOrders(orders) {
         this.orders = orders;
     },
-
-
-
 
     saveToLocalStorage(data) {
         // Save data to local storage

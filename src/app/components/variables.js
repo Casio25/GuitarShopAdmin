@@ -2,7 +2,7 @@ import acustic from "../assets/images/acustic.png";
 import electro from "../assets/images/electro.png";
 import ukulele from "../assets/images/ukulele.png";
 
-export const numberOfOffers = 85;
+export const numberOfOffers = 15;
 export const photoList = [acustic, electro, ukulele];
 export const typeList = ["acustic", "electro", "ukulele"];
 export const HTMLTypeList = ["Акустична", "Електро", "Укулеле"]
