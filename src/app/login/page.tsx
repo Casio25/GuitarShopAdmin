@@ -14,13 +14,19 @@ function Login() {
 
 
     const handleLogin = async() => {
-        const backendLogin = {
-            email: email,
-            password: password,
+        try {
+            const backendLogin = {
+                email: email,
+                password: password,
 
+            }
+            const result = await postLogin(backendLogin)
+            LoginStore.setJwtToken(result)
+            console.log("token after login: ", LoginStore.jwtToken)
+        }catch(error){
+            console.error(error)
         }
-        postLogin(backendLogin)
-        console.log("loginstore after pressing login button: ", LoginStore.jwtToken)
+        
     }
     return (
         <>

@@ -3,7 +3,7 @@ import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import { Header } from './components/Header'
-import { DataFetcher } from "./store/FilteredDataStore"
+import { DataFetcher } from "./store/FilteredDataStore.js"
 import {QueryClientComponent} from "./components/QueryClient"
 
 

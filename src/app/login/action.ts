@@ -1,10 +1,11 @@
-
-import { ILoginStore } from './../utils/interface/ILogin';
 "use server"
+import { cookies } from 'next/headers';
+import { ILoginStore } from './../utils/interface/ILogin';
 import { ILogin } from "../utils/interface/ILogin"
 import LoginStore from "../store/LoginStore"
 import { observer } from "mobx-react";
 import { runInAction } from 'mobx'; //allows us to use mobx stuff in async fucntions
+import { json } from 'stream/consumers';
 export const postLogin = async (data: ILogin) => {
     try {
         const response = await fetch("http://localhost:4000/auth/signin", {
@@ -12,15 +13,10 @@ export const postLogin = async (data: ILogin) => {
             headers: { "Content-Type": "application/json", "Access-Control-Allow-Origin": "*" },
             body: JSON.stringify(data)
         });
-
         const json = await response.json();
-        runInAction(()=>{
         if (json.access_token) {
-            LoginStore.setJwtToken(json.access_token);
-            LoginStore.setLoginEmail(data.email);
-            LoginStore.setLoginPassword(data.password);
-            console.log(`store data ${LoginStore.jwtToken}`);
-            console.log(`store email ${LoginStore.email}`);
+            cookies().set("loginData", json.access_token)
+            return json.access_token
         } else {
             console.log(json.error);
             switch (json.error) {
@@ -36,8 +32,7 @@ export const postLogin = async (data: ILogin) => {
                 default:
                     break;
             }
-        }
-    })
+        }   
     } catch (error) {
         console.error("Error:", error);
     }

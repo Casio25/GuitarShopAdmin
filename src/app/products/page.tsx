@@ -3,7 +3,7 @@ import { toJS } from "mobx";
 import { observer } from "mobx-react";
 import React, { useState } from "react";
 import FilterBlock from "../components/Filter/Filter";
-import filteredDataStore from "../store/FilteredDataStore.js";
+import filteredDataStore from "../store/FilteredDataStore";
 // import ShoppingCartStore from "../store/ShoppingCartStore.js";
 import SortBlock from "../components/Sort/Sort";
 import "./Catalog.css";
@@ -15,10 +15,12 @@ import electro from "../assets/images/electro.png";
 import ukulele from "../assets/images/ukulele.png";
 import { Button, Stack } from '@mui/material'
 import Link from 'next/link'
+import { ICatalogData } from "../utils/interface/ICatalogData";
+import Image from 'next/image'
 
 
 
-const AllProducts = () => {
+const AllProducts :React.FC<{ data: ICatalogData[] }> = ({ data }) => {
     
 
         const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,7 +34,7 @@ const AllProducts = () => {
         const [currentPage, setCurrentPage] = useState(startPage);
 
 
-    function imageSrc(data) {
+    function imageSrc(data: string) {
         switch (data) {
             case "acustic.png":
                 return acustic;
@@ -50,7 +52,7 @@ const AllProducts = () => {
 
         const totalPages = Math.ceil(toJS(filteredDataStore.currentProductList).length / cardsPerPage);
 
-        const goToPage = (pageNumber) => {
+        const goToPage = (pageNumber: number) => {
             setCurrentPage(pageNumber);
         };
 
@@ -64,7 +66,7 @@ const AllProducts = () => {
                     <div className="guitar_catalog">
                         {currentCards.map((filteredData, index) => (
                             <div className="guitar_card" key={index}>
-                                <img className="guitar_image" src={imageSrc(filteredData.photo)} alt="photo" />
+                                <Image className="guitar_image" src={imageSrc(filteredData.photo)} width={70} height={70} alt="photo" />
                                 <p className="guitar_name">{filteredData.productName}</p>
                                 <p className="guitar_price">{filteredData.price}</p>
                                 <p className="guitar-rating">
@@ -75,11 +77,8 @@ const AllProducts = () => {
                                     ))}
                                 </p>
                                 <Stack className="guitar_buttons" direction='row'>
-                                    <Button color='info' variant="contained" size='small' className="button_more_info" onClick={() => ModalMoreInfo(filteredData)}>
-                                        Інформація
-                                    </Button>
                                     <Link href="/changeProductPage">
-                                        <Button className="button_change_product" onClick={() => ChangeProduct(filteredData)}>Change Product</Button>
+                                        <Button className="button_change_product">Change Product</Button>
                                     </Link>
                                 </Stack>
                             </div>

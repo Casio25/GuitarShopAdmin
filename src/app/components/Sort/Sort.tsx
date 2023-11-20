@@ -3,7 +3,7 @@ import { observer } from "mobx-react";
 import { toJS } from "mobx";
 import React from "react";
 import { useEffect, useState } from "react";
-import filteredDataStore from "../../store/FilteredDataStore.js";
+import filteredDataStore from "../../store/FilteredDataStore";
 import "./Sort.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faAngleUp } from '@fortawesome/free-solid-svg-icons';

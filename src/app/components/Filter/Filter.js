@@ -1,9 +1,10 @@
+"use client"
 import { observer } from "mobx-react";
 import { flowResult, toJS } from "mobx";
 import { useState, useEffect } from "react";
-
 import { offers } from "../FakeData.js";
-import filteredDataStore from "../../store/FilteredDataStore.js";
+import filteredDataStore from "../../store/FilteredDataStore";
+import {queryString} from "../../store/filteredDataStore.js"
 import LoginStore from "@/app/store/LoginStore.js";
 import * as variables from "../variables.js";
 import "./Filter.css"
@@ -43,7 +44,7 @@ const FilterBlock = () => {
 
         const filtered = filteredDataStore.applyFilter(filteredDataStore.initialData);
         filteredDataStore.updateFilteredData(filtered);
-        fetchData()
+        fetchData(filteredDataStore.take, queryString, LoginStore.jwtToken)
         console.log("jwt during confirm filter: ", LoginStore.jwtToken)
 
     }

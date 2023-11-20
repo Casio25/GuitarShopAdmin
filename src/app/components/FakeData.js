@@ -73,9 +73,9 @@ const createJSON = () => {
 
     return {
         id: offerId++,
-        guitarName: RandomName(typeValue),
+        productName: RandomName(typeValue),
         type: typeValue,
-        photo: variables.photoList[getRandomTypeName],
+        photo: "",
         price: priceRanger(typeValue),
         string: stringRanger(typeValue),
         comments: slicedShuffledComments,

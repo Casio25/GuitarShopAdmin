@@ -1,3 +1,4 @@
+"use client"
 import { observable } from "mobx";
 
 const LoginStore = observable({
@@ -20,7 +21,6 @@ const LoginStore = observable({
     },
 
     saveToLocalStorage(data) {
-        // Save data to local storage
         localStorage.setItem("loginData", JSON.stringify(data));
     },
 });

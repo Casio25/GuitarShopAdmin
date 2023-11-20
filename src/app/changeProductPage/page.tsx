@@ -152,7 +152,7 @@ const ChangeProductPage = () => {
 
 
     //Our final change
-    const confirmChange = () => {
+    const confirmChange = async() => {
         const updatedProductData: IProductData = {
             id: ChangeProductStore.id,
             authorId: ChangeProductStore.authorId,
@@ -173,7 +173,8 @@ const ChangeProductPage = () => {
 
         setProductData(updatedProductData);
         console.log(updatedProductData);
-        changeProduct(updatedProductData, LoginStore)
+        console.log("token during changing: ", LoginStore.jwtToken)
+        await changeProduct(updatedProductData, LoginStore.jwtToken)
     };
 
     return (
@@ -227,7 +228,7 @@ const ChangeProductPage = () => {
                     />
                 </FormGroup>
             </Stack>
-            <Button onClick={() => { confirmChange() }}>Confirm Change</Button>
+            <Button onClick={() => {confirmChange()}}>Confirm Change</Button>
         </div>
     )
 }

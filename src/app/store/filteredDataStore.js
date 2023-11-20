@@ -10,6 +10,7 @@ import { fetchData } from "./actions";
 
 
 
+
 const filteredDataStore = observable({
     initialData: offers,
     currentProductList: offers,
@@ -162,9 +163,31 @@ const filteredDataStore = observable({
 
 export default filteredDataStore;
 
+const queryParams = {};
+
+        if (filteredDataStore.filterArray.type.length > 0) {
+            queryParams.type = filteredDataStore.filterArray.type.join(',')
+        }
+        if (filteredDataStore.filterArray.string.length > 0) {
+            queryParams.string = filteredDataStore.filterArray.string.join(',')
+        }
+        if (
+        filteredDataStore.filterArray.price.minPrice !== undefined ||
+        filteredDataStore.filterArray.price.maxPrice !== undefined
+        ) {
+            queryParams.price = JSON.stringify({
+                minPrice: filteredDataStore.filterArray.price.minPrice,
+                maxPrice: filteredDataStore.filterArray.price.maxPrice,
+            });
+        }
+
+    export const queryString = Object.keys(queryParams)
+            .map((key) => `${key}=${queryParams[key]}`)
+            .join('&');
+
 
 export function DataFetcher() {
-    const { data: initialData, isLoading, isError } = useQuery("initialData", () => fetchData());
+    const { data: initialData, isLoading, isError } = useQuery("initialData", () => fetchData(filteredDataStore.take, queryString, LoginStore.jwtToken));
 
     useEffect(() => {
         console.log("initialData:", initialData);
@@ -173,8 +196,8 @@ export function DataFetcher() {
         console.log("LoginStore token during reload: ", LoginStore.jwtToken)
 
         if (!isLoading && !isError) {
-            filteredDataStore.initialData = initialData || offers;
-            filteredDataStore.currentProductList = initialData || offers;
+            filteredDataStore.initialData = initialData;
+            filteredDataStore.currentProductList = initialData;
         }
     }, [initialData, isLoading, isError]);
 
